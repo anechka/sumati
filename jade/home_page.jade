@@ -1,0 +1,218 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', rel='stylesheet')
+        //- link(href='bower_components/bootstrap/dist/css/bootstrap.css', rel='stylesheet')
+        link(rel="stylesheet", type="text/css", href="css/main.css")
+        title Home page
+
+    body.homepage-body
+
+        .container-fluid
+            .row
+                section#homepage
+                    .col-md-12
+                        .row
+                            .col-md-12
+                                nav.navbar.navbar-default.navbar-fixed-top
+                                    .container
+                                        .row
+                                            .col-md-12.sumati-logo-container
+
+                                                a(href="home_page.html")
+
+                                                    img.img-responsive(src='images/svg/sumati_logo.svg')
+
+                                            .navbar-header
+                                                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#main-nav', aria-expanded='false')
+                                                    span.sr-only Toggle navigation
+                                                    span.icon-bar
+                                                    span.icon-bar
+                                                    span.icon-bar
+                                            #main-nav.collapse.navbar-collapse
+
+                                                ul.col-lg-6.col-md-8.col-xs-12.nav.navbar-nav.main-navbar.navbar-home
+
+                                                    li
+                                                        a(href='home_page.html') Home
+
+                                                    li.dropdown
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | Contract Risk Management
+                                                        ul.dropdown-menu
+
+
+                                                            li
+                                                                a(href='index.html#sumaticontractrisk') Sumati Contract Risk Management
+                                                                    sup TM
+                                                            li
+                                                                a(href='index.html#legacy') Legacy Contract Migration
+                                                            li
+                                                                a(href='index.html#virtualattorney') Sumati Virtual Attorney
+                                                                    sup TM
+
+                                                            li
+                                                                a(href='index.html#clmconfig') CLM Configuration / Customization
+
+                                                            li
+                                                                a(href='index.html#clmapplication') CLM Application Support
+
+                                                            li
+                                                                a(href='index.html#sumaticontracts') Sumati Contracts
+                                                                    sup TM
+
+                                                    li.dropdown
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | About
+                                                        ul.dropdown-menu
+                                                            li
+                                                                a(href='about_page.html#company') The Company
+
+                                                            li
+                                                                a(href='about_page.html#ourteam') Our Team
+                                                            li
+                                                                a(href='about_page.html#mgmt') Managment
+
+
+                                                    li.dropdown
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown2', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | Contact
+                                                        ul.dropdown-menu
+
+                                                            li
+                                                                a(href='contact_page.html') Contact Sumati
+
+
+                    .col-md-12.col-sm-12.col-xs-12.carousel-container
+
+                        .row
+                            #carousel-video.carousel.slide(data-ride='carousel', data-interval="10000")
+
+
+                                // Wrapper for slides
+                                .carousel-inner(role='listbox')
+                                    .item.active
+                                        .row
+                                            .col-md-12
+                                                video(autoplay, preload="auto", loop)
+                                                    source(src="video/video-background-01-HD1080.mp4", type="video/mp4")
+                                                    source(src="video/video-background-01-HD1080-WEBm-vp9.webm", type="video/webm")
+
+
+
+                                            .container(style="position: relative")
+
+                                                .col-md-12.col-xs-12.main-text-container.first-slide
+                                                    .row
+
+                                                        .col-lg-12.col-md-12.header-container.clearfix
+
+
+                                                            .col-lg-12.col-md-12.col-xs-12
+
+                                                                h1 Enabling Lawyers
+                                                                    br
+                                                                    | to Practice More Law
+                                                                    sup TM
+
+                                                                p.fadein-paragraph Sumati provides Contract Risk Management™ and legal process support to the
+                                                                        |office of General Counsel. We enable lawyers – as well as their IT, procurement and finance
+                                                                        |departments –  to focus on substantive issues, while helping their companies reduce risk.
+                                                // Indicators
+                                                ol.carousel-indicators
+                                                    li.active(data-target='#carousel-video', data-slide-to='0')
+                                                    li(data-target='#carousel-video', data-slide-to='1')
+                                                    li(data-target='#carousel-video', data-slide-to='2')
+
+                                    .item
+                                        .row
+                                            .col-md-12
+                                                img.img-responsive(src="images/man-professional.jpg")
+
+
+
+                                            .container(style="position: relative")
+
+
+                                                .col-md-12.col-xs-12.main-text-container.second-slide
+                                                    .row
+
+                                                        .col-lg-12.col-md-12.col-xs-12.header-container
+
+                                                            .col-lg-12.col-md-12.col-xs-12
+
+
+                                                                h1 Sumati Contract Risk
+                                                                    br
+                                                                    |Management
+                                                                    sup TM
+
+                                                                p.fadein-paragraph We help companies reduce risk by discovering, organizing and enriching contracts
+                                                                    |and contract metadata. Our attorney and technology teams are experts at configuring,
+                                                                    |customizing and testing
+                                                                    br
+                                                                    |CLM systems to optimize and manage your material obligations.
+                                                // Indicators
+                                                ol.carousel-indicators
+                                                    li.active(data-target='#carousel-video', data-slide-to='0')
+                                                    li(data-target='#carousel-video', data-slide-to='1')
+                                                    li(data-target='#carousel-video', data-slide-to='2')
+
+                                    .item
+                                        .row
+                                            .col-md-12
+                                                video(autoplay, preload="auto", loop)
+                                                    source(src="video/video-background-02-HD1080.mp4", type="video/mp4")
+                                                    source(src="video/video-background-02-HD1080-WEBm-vp9.webm", type="video/webm")
+
+
+                                            .container(style="position: relative;")
+
+
+                                                .col-md-12.col-xs-12.main-text-container.third-slide
+                                                    .row
+                                                        .col-lg-12.col-md-12.col-xs-12.header-container
+
+                                                            .col-lg-12.col-md-12.col-xs-12
+
+                                                                h1 Delegate Smarter.
+                                                                            br
+                                                                            |Sumati Virtual Attorney
+                                                                            sup TM
+
+                                                                        p.fadein-paragraph Direct non-bespoke work streams to our
+                                                                            br
+                                                                            |dedicated teams of CLM system experts to execute work.
+
+                                                // Indicators
+                                                ol.carousel-indicators
+                                                    li.active(data-target='#carousel-video', data-slide-to='0')
+                                                    li(data-target='#carousel-video', data-slide-to='1')
+                                                    li(data-target='#carousel-video', data-slide-to='2')
+
+
+                                // Controls
+                                a.left.carousel-control.carousel-index(href='#carousel-video', role='button', data-slide='prev')
+                                    span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                                    span.sr-only Previous
+                                a.right.carousel-control.carousel-index(href='#carousel-video', role='button', data-slide='next')
+                                    span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                                    span.sr-only Next
+
+
+
+
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        //- script(src="bower_components/jquery/dist/jquery.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        script(src="javascript/j.js")
+
+        //- script(src="bower_components/bootstrap/dist/js/bootstrap.js")
+            // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+        // WARNING: Respond.js doesn't work if you view the page via file://
+        //if lt IE 9
+            script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+            script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')

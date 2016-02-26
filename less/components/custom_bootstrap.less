@@ -1,0 +1,83 @@
+/// Navbar
+.navbar.navbar-default {
+  background: @navbar-background-gradient;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+
+  .navbar-header {
+    color: white;
+
+    @media (max-width: 992px) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .navbar-nav > li > a {
+    padding-top: @base-padding-top;
+    padding-bottom: @base-padding-top;
+
+    & > span.userlogin {
+      color: white;
+      font-weight: bold;
+      background-color: @navbar-right-logout-bg;
+
+      padding: 6px 16px;
+      @media (max-width: 768px) {
+        float: right;
+      }
+    }
+
+  }
+
+}
+
+/// Alerts
+
+.alert {
+  color: white;
+  background: @deep-blue linear-gradient(45deg, @light-blue, @deep-blue);
+
+  .mega-octicon {color: @icon-color-light;}
+
+  .alert-message {
+    font-size: 16px;
+    position: relative;
+    top: -5px;
+  }
+
+  a {
+    color: @href-color;
+    &:hover {
+      color: @href-color-hover;
+    }
+  }
+
+  &.alert-warning, &.alert-danger {
+    border-color: @deep-blue;
+
+    .mega-octicon {color: @icon-color-yellow}
+
+    .alert-message{
+      font-weight: bold;
+    }
+  }
+
+  &.alert-info {
+    border: none;
+  }
+
+}
+
+@media (max-width: 767px) {
+  // Dropdowns get custom display when collapsed
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: @light-blue;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+}

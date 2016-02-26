@@ -1,0 +1,14 @@
+{% if fields %}
+
+  {% for field, values in fields.items %}
+
+    {% if field != '_text_' %}<span style="font-weight: bold;">{{ field }}: </span>{% endif %}
+    {%if values|length == 1 %}
+        {{ values|safeseq|join:", " }}<br>
+    {%else%}
+        {{values}};<br>
+    {%endif%}
+
+  {% endfor %}
+
+{% endif %}

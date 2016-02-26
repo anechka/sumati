@@ -1,0 +1,98 @@
+.sidebar {
+  background-color: white;
+  ul#side-menu {
+    background: @sidebar-bg-color;
+  }
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.sidebar ul li.link {
+  border-bottom: 1px solid @sidebar-border-color;
+}
+
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+  border-bottom: 0;
+}
+
+.sidebar .nav-second-level li a {
+  padding-left: 37px;
+}
+
+.sidebar ul li a {
+  color: @sidebar-link-color;
+  padding: 10px 0 10px 30px;
+  font-size: @default-font-size;
+  //background: @sidebar-background-gradient;
+
+  &:hover {
+    color: @href-color-hover;
+    font-weight: bold;
+    background: white;
+  }
+  &:focus {
+    color: @href-color-hover;
+    background: white;
+    font-weight: bold;
+  }
+
+  em.fa {
+    @default-icon-sidebar-size: @default-font-size;
+    @em-padding-right: 3px;
+
+    padding-right: @em-padding-right;
+    font-size: @default-icon-sidebar-size;
+    vertical-align: 1px;
+
+    &.fa-home {
+      padding-right: @em-padding-right;
+      margin-left: -2px;
+
+      font-size: @default-icon-sidebar-size + 3px;
+      vertical-align: 0;
+    }
+
+    &.fa-search {
+      vertical-align: 2px;
+    }
+
+    &.fa-file {
+      padding-right: 2px + @em-padding-right;
+      margin-left: 1px;
+
+      font-size: @default-icon-sidebar-size - 2px;
+    }
+
+    &.fa-question-circle {
+      vertical-align: 0;
+    }
+  }
+}
+
+// Active menu item
+.sidebar ul li.active a {
+  color: @href-color-hover;
+  font-weight: bold;
+  cursor: default;
+}
+
+@media(min-width:768px) {
+  .sidebar {
+    float: left;
+    position: absolute;
+    width: 220px;
+    height: 100%;
+    border-right: 1px solid @sidebar-border-color;
+    box-shadow: 0 10px 20px @light-grey;
+  }
+
+  .navbar-top-links .dropdown-messages,
+  .navbar-top-links .dropdown-tasks,
+  .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+}

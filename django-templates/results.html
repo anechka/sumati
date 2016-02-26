@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load search_tags %}
+{% load staticfiles %}
+
+{% block content %}
+<div ng-controller="ResultsController">
+
+  <modal-dialog show='modalShown' width='350px' height='30%'></modal-dialog>
+
+  <div class="row" class='results-page' cg-busy="promise">
+      <div class="col-md-6 search-result-box" style="height: 600px; overflow-y: scroll;">
+        {% if error %}
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <span class="mega-octicon octicon-alert"></span>
+                    <span class="alert-message">{{ error }}</span>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-md-12">
+            <span class="search-results">Search Results for: "{{ user_term }}"</span>
+        </div>
+
+        {% if results.hits %}
+        <div class="col-md-12">
+            <span>
+                <strong>
+                    Results {%if start == 0 %} 1 {%else%} {{ start }} {% endif %}- {{ end }} of {{ results.hits }}
+                </strong>
+            </span>
+        </div>
+        {%else%}
+            <div class="col-md-12"><span><strong>No results</strong></span></div>
+        {% endif %}
+
+        <div class="col-md-12 hr-container">
+            <hr class="hr-grey">
+        </div>
+
+        {% if results %}
+            {# Results loop #}
+            {% for res in results %}
+                <div class="col-md-12" >
+                    <p>
+                      {{forloop.counter}}. {% highlights results res.id %}
+                    </p>
+
+                    <p>
+                        <a ng-click="setUrlQuickView({{res.id}})"><span><strong>Source file:</strong></span>
+                        {%for path in res|path_collection%}{{path.name}}/{%endfor%}<span><strong>{{res.filename|last}}</strong></span></a>
+                    </p>
+
+                    <!-- href="http://app.box.com/files/0/f/{{ res.path_ids|last }}/1/f_{{ res.id }}" -->
+                    <ul class="list-inline list-unstyled">
+                        <li ng-click="setUrl({{res.id}})">
+                            <a style="cursor:pointer;">
+                                View
+                            </a>
+                        </li>
+                        <li>
+                            <!--TODO: Fix download link -->
+                            <a href="#" class="download" ng-click="download({{res.id}})">
+                                 <span class="fa fa-cloud-download"></span>
+                                 <span>Download</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="" style="cursor:pointer;" ng-click="metadataView({{res.meta_id}})">
+                                Metadata View
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-12 hr-container">
+                    <hr class="hr-grey">
+                </div>
+            {% endfor %}
+            <nav class="col-md-12">
+                <ul class="col-md-12 col-md-offset-3 text-center list-unstyled pagination pagination-sm">
+                    <li{% if not prev_page %} class="disabled" {% endif %}>
+                        <a href='/search/next/?{{prev_page}}' class="prev">
+                            <!--<span class="arrow-left">H</span>-->
+                            Prev
+                        </a>
+                    </li>
+
+                    {% for page, page_link in page_nums %}
+                        {% if dots_mode %}
+                            {% if page_link%}
+                                <li {% if page == cur_page %} class="disabled"{% endif %}>
+                                    <a href="/search/next/?{{page_link}}">
+                                        <span >
+                                        {{page}}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="disabled">
+                                    <a href="#">
+                                        <span >
+                                        ...
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <li{% if not next_page %} class="disabled"{% endif %}>
+                        <a href='/search/next/?{{next_page}}' style="cursor: pointer;" class="next {% if not prev_page %}disabled{% endif %}">
+                                Next
+                            <!--<span class="arrow-right">h</span>-->
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-md-6 right-side-container">
+            {% verbatim %}
+                <iframe ng-show="getUrl()" ng-src="{{getUrl()}}" style="width: 100% !important; height: 600px !important;" allowfullscreen="allowfullscreen"></iframe>
+            {% endverbatim %}
+          <!-- <div class="col-md-12 right-side-content"></div> -->
+        </div>
+
+    </div><!-- END row -->
+    {% endif %}
+
+  </div>
+</div>
+
+
+{% endblock content%}

@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div>
+    <div>
+        <div class="row" ng-controller="QueryBuilderController" ng-init="setDefaults({{root_folder.id}}, '{{root_folder.name}}')">
+            <div class="col-md-12 search-result-box" cg-busy="promise">
+                <div class="col-md-12"><span class="search-builder">Sumati Search Builder<sup>TM</sup></span></div>
+                    <div class="col-md-12">
+                        <div class="search-box-container">
+                            <div class="row">
+                                <form method="POST" action="/search/query_builder/">
+                                    {% csrf_token %}
+                                    <div class="col-md-7 col-xs-12">
+                                        <div class="form-group has-feedback">
+                                                <label for="query-result" class="text-uppercase">enter general search info:</label>
+                                                <input id="query-result" name="solr_query" type="text" aria-describedby="inputSearchStatus"
+                                                class="form-control" ng-model="queryResult"/>
+                                                <input id="qs-solr-folder" name="solr_folder" type="hidden" ng-model="selectedFolder">
+                                                <input id="qs-solr-query" name="solr_query_raw" type="hidden" ng-model="solrQueryRaw">
+                                                <span aria-hidden="true"
+                                                class="glyphicon glyphicon-search form-control-feedback"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xs-10 btn-refresh-container">
+                                        <!-- Send Button -->
+                                        <button id="submit-send-query" type="submit" class="btn btn-small btn-send text-uppercase">
+                                            Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-12 container-customize">
+                    <span class="customize">
+                        Narrow your search by selecting a folder and metadata values.
+                    </span>
+                </div>
+                <form>
+                    <div class="col-md-12 choose-folder clearfix">
+                        <div class="col-md-3 form-lg">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="folder-path" class="text-uppercase">Choose folder</label>
+                                    <select id="folder-path" class="form-control" ng-model="selectedFolder" ng-change="changeSearchFolder()">
+                                        {%verbatim%}
+                                        <option ng-if="searchFolders.length" ng-repeat="search_folder in searchFolders track by $index" ng-selected="selectFolder(search_folder)">{{search_folder}}</option>
+                                        {%endverbatim%}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 col-xs-5 btn-browse-container">
+                            <button
+                                class="text-uppercase btn btn-small btn-browse"
+                                data-toggle="modal" data-target="#fileBrowserModal" id="browse" type="button">Browse</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form>
+                    <div class="col-md-12">
+                        <div class="col-md-12 content-container">
+                            <div class="row" ng-repeat="row in rows">
+                                <div class="col-md-3 form-lg">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="metadata-field-choice" class="text-uppercase">Metadata name:</label>
+                                            {%verbatim%}
+                                            <select ng-change="changeMetaField(row, $index)"
+                                                    ng-model="row.metadataName"
+                                                    id="metadata-field-choice-{{row.metadataName}}"
+                                                    class="form-control metadata-field-choice">
+                                                <option  ng-repeat="metaField in metaFields track by $index" value="{{metaField}}" ng-selected="metaField==row.metadataName">{{metaField}}</option>
+                                            </select>
+                                            {%endverbatim%}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 requirement">
+                                        <div class="form-group">
+                                            <label for="metadata-condition" class="text-uppercase">Requirement:</label>
+                                            <select ng-model="row.metadataCondition" id="metadata-condition" class="form-control metadata-condition">
+                                                {%verbatim%}
+                                                <option ng-repeat="option in options">{{option}}</option>
+                                                {%endverbatim%}
+                                            </select>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-3 input-value-container">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            {%verbatim%}
+                                                <label for="metadata-value-{{$index}}" class="text-uppercase">Value:</label>
+
+                                                <input ng-if="row.type!='date'"
+                                                       ng-model="row.metadataValue"
+                                                       type="text"
+                                                       class="form-control input-value">
+
+                                                <input type="datetime"
+                                                       date-time
+                                                       max-view="year"
+                                                       min-view="date"
+                                                       ng-model="row.metadataValue"
+                                                       format="yyyy-MM-dd"
+                                                       auto-close="true"
+                                                       class="form-control input-value"
+                                                       ng-if="row.type=='date'">
+                                            {%endverbatim%}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 btn-icon-container">
+                                    <a href="#" class="add-term">
+                                        <span class="fa fa-plus"></span>
+                                        <button class="btn btn-small btn-add add-new-requirement text-uppercase" ng-click="createTerm()">Add term</button>
+                                    </a>
+                                    <a ng-show="rows.length > 1" href="#" class="remove"><span class="fa fa-minus"></span>
+                                        <button class="btn btn-small btn-remove remove-requirement text-uppercase" ng-click="removeTerm(row)">Remove</button>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <hr class="line-hr">
+                                    </div>
+                                    <div class="row">
+                                        {%verbatim%}
+                                        <label class="radio-inline">
+                                            <input class="btn-group" ng-model="row.join" type="radio" name="inlineRadio{{$index}}" value="AND"> and
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="btn-group" ng-model="row.join" type="radio" name="inlineRadio{{$index}}" value="OR"> or
+                                        </label>
+                                        {%endverbatim%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade"
+     id="fileBrowserModal"
+     ng-controller="FileBrowserController"
+     data-folder-id="{{root_folder.id}}"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Folder Browser</h4>
+          </div>
+          <div class="modal-body">
+               <div id='qb-file-browser'>
+                   <div data-folder-id="{{ root_folder.id }}">
+                       <div style="overflow-y:scroll; height: 300px;">
+                           <query-view tree-data="filebrowser_data"
+                                     tree-control="files_tree"
+                                     on-select="tree_handler(branch)"
+                                     icon-expand="fa fa-folder"
+                                     icon-collapse="fa fa-folder-open"
+                                     icon-leaf="fa fa-file-text">
+                           </query-view>
+                       </div>
+                   </div>
+               </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="select-folder" ng-click="applySelectedFolder()" >Select</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content%}
+
+{% block scripts%}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'build/js/main.js' %}"></script>
+{% endblock scripts%}

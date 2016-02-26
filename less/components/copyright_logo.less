@@ -1,0 +1,45 @@
+.logo-top-text {
+  position: relative;
+  top: 30px;
+  margin-left: 15px;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  &.logo-header {
+    width: 190px;
+  }
+
+  &.logo-description {
+    margin-left: 41px;
+    vertical-align: -5px;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+
+    @media (max-width: 479px) {
+      display: block;
+      margin-left: 15px;
+    }
+  }
+
+}
+
+.rights-footer {
+  margin-top: 25px;
+  padding-left: 45px;
+  color: lighten(@light-grey, 10%);
+  font-size: 12px;
+
+  >.copyright {
+    margin-right: 30px;
+  }
+
+  > .privacy, > .divider, > .disclaimer {
+    padding-left: 4px;
+    padding-right: 4px;
+
+    a { color: #555 }
+  }
+
+}

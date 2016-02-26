@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div ng-controller="FileBrowserController" data-folder-id="{{folder.id}}" >
+    <modal-dialog show='modalShown' width='350px' height='30%'></modal-dialog>
+    <div class="row" cg-busy="promise">
+        <div class="col-md-6 search-result-box">
+          <div class="col-md-12">
+              <span class="search-builder">Contract library</span>
+          </div>
+          <div class="col-md-12 component-header-container">
+              <span class="metadata-header">Box > {{ folder.name }}</span>
+          </div>
+            <div class="col-md-12 contracts-left-side-info" >
+
+              {% if request.session.user.is_admin %}
+                <button ng-click="openBox()" class="btn btn-open-box pull-right">OPEN BOX.COM<em class="fa fa-external-link"></em></button>
+              {% endif %}
+
+                <div class="container-scroll">
+                    {% verbatim %}
+
+                    <div class="filebrowser">
+                        <!-- FileBrowser Angular component -->
+                        <library-view tree-data="filebrowser_data"
+                                      tree-control="files_tree"
+                                      on-select="tree_handler(branch)"
+                                      icon-expand="arrow-right-black"
+                                      icon-collapse="arrow-down-blue"
+                                      icon-leaf="fa fa-file-text-o">
+                        </library-view>
+                    </div>
+
+                    {% endverbatim %}
+                </div>
+                <div class="row">
+                  <div class="col-md-12 component-header-container">
+                      <span class="metadata-header">Metadata Quick View</span>
+                  </div>
+                </div>
+
+                <div class="meta-info">
+                    {%verbatim%}
+                    <div class="info-header"><span>{{selectedBranch.label}}</span>
+                        <div class="pull-right">
+                            <a href="#" class="view" ng-click="metadataView()">view</a>
+
+                            <a href="#" class="download-link" ng-click="metadataDownload()">
+                                <em class="fa fa-cloud-download"></em><span class="download">download</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <table class="list-content metadata-list">
+                        <tbody>
+                            <tr ng-repeat="metafield in selectedBranch.data.metadata">
+                                <td class="type">{{metafield[0]}}:</td>
+                                <td class="value">{{metafield[1]}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    {%endverbatim%}
+                </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 right-side-container" >
+            <div class="col-md-12 right-side-content">
+                <!-- Document Area -->
+              {%verbatim%}
+              <iframe ng-show="getBoxContractUrl()"
+                      ng-src="{{getBoxContractUrl()}}"
+                      style="margin-left: -15px; width: 107% !important; height: 600px !important;"
+                      allowfullscreen="allowfullscreen">
+              </iframe>
+              {%endverbatim%}
+            </div>
+        </div>
+  </div>
+</div>
+{% endblock %}

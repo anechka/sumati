@@ -1,0 +1,120 @@
+doctype html
+html(lang='en')
+
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', rel='stylesheet')
+        //- link(href='bower_components/bootstrap/dist/css/bootstrap.css', rel='stylesheet')
+        link(rel="stylesheet", type="text/css", href="css/main.css")
+        title Contact
+
+    body
+        .container-fluid
+            .row
+                section#contact
+                    .container
+                        .row
+                            .col-md-12
+                                nav.navbar.navbar-default.navbar-fixed-top
+                                    .container
+                                        .row
+                                            .col-md-12.sumati-logo-container
+
+                                                a(href="home_page.html")
+
+                                                    img.img-responsive(src='images/svg/sumati_logo.svg')
+
+                                            .navbar-header
+                                                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#main-nav', aria-expanded='false')
+                                                    span.sr-only Toggle navigation
+                                                    span.icon-bar
+                                                    span.icon-bar
+                                                    span.icon-bar
+                                            #main-nav.collapse.navbar-collapse
+                                                ul.col-lg-6.col-md-7.col-xs-12.nav.navbar-nav.main-navbar
+
+                                                    li
+                                                        a(href='home_page.html') Home
+
+                                                    li.dropdown
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | Contract Risk Management
+                                                        ul.dropdown-menu.about-risk
+
+                                                            li
+                                                                a(href='index.html#sumaticontractrisk') Sumati Contract Risk Management
+                                                                    sup TM
+                                                            li
+                                                                a(href='index.html#legacy') Legacy Contract Migration
+                                                            li
+                                                                a(href='index.html#virtualattorney') Sumati Virtual Attorney
+                                                                    sup TM
+
+                                                            li
+                                                                a(href='index.html#clmconfig') CLM Configuration / Customization
+
+                                                            li
+                                                                a(href='index.html#clmapplication') CLM Application Support
+
+                                                            li
+                                                                a(href='index.html#sumaticontracts') Sumati Contracts
+                                                                    sup TM
+
+                                                    li.dropdown
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown2', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | About
+                                                        ul.dropdown-menu.about
+                                                            li
+                                                                a(href='about_page.html#company') The Company
+
+                                                            li
+                                                                a(href='about_page.html#ourteam') Our Team
+                                                            li
+                                                                a(href='about_page.html#mgmt') Managment
+
+                                                    li.dropdown
+
+                                                        a.dropdown-toggle(href='#', data-toggle='dropdown2', role='button', aria-haspopup='true', aria-expanded='false')
+                                                            | Contact
+
+                                                        ul.dropdown-menu.about-contact
+                                                            li
+                                                                a(href='contact_page.html') Contact Sumati
+
+                    .container
+                        .row
+                            .col-md-12
+                                h3 Contact Sumati
+                                    sup TM
+
+
+                            .col-md-12
+                                p.general For general inquiries regarding The Sumati Group please contact us
+                                    br
+                                    |via email at
+                                    a.link-info(href="mailto:info@sumatigroup.com")   info@sumatigroup.com
+
+                            .col-md-12
+                                h4 Corporate Headquarters
+                                .col-md-3
+                                    .row
+                                        p 1516 NE 37th Avenue, Suite 220 Portland, Oregon 97232 503.970.3104
+                            .col-md-12
+                                h4 India Operations Center
+                                .col-md-3
+                                    .row
+                                        p Tower E, First Floor, DLF, Rajiv Gandhi Technology Park, Chandigarh, 160101 0172-4637111
+
+
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+        //- script(src="bower_components/jquery/dist/jquery.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        //- script(src="bower_components/bootstrap/dist/js/bootstrap.js")
+        script(src="javascript/j.js")
+        // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+        // WARNING: Respond.js doesn't work if you view the page via file://
+        //if lt IE 9
+            script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+            script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
